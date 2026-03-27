@@ -1,0 +1,429 @@
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ➜  cd /root && source /root/venv/bin/activate
+
+root@controlplane ~ via 🐍 v3.12.3 (venv) ➜  pip install chromadb sentence-transformers langchain langchain-openai langchain-community langchain-huggingface numpy
+Requirement already satisfied: chromadb in ./venv/lib/python3.12/site-packages (1.5.5)
+Requirement already satisfied: sentence-transformers in ./venv/lib/python3.12/site-packages (5.3.0)
+Requirement already satisfied: langchain in ./venv/lib/python3.12/site-packages (1.2.13)
+Requirement already satisfied: langchain-openai in ./venv/lib/python3.12/site-packages (1.1.12)
+Requirement already satisfied: langchain-community in ./venv/lib/python3.12/site-packages (0.4.1)
+Requirement already satisfied: langchain-huggingface in ./venv/lib/python3.12/site-packages (1.2.1)
+Requirement already satisfied: numpy in ./venv/lib/python3.12/site-packages (2.4.3)
+Requirement already satisfied: build>=1.0.3 in ./venv/lib/python3.12/site-packages (from chromadb) (1.4.2)
+Requirement already satisfied: pydantic>=2.0 in ./venv/lib/python3.12/site-packages (from chromadb) (2.12.5)
+Requirement already satisfied: pydantic-settings>=2.0 in ./venv/lib/python3.12/site-packages (from chromadb) (2.13.1)
+Requirement already satisfied: pybase64>=1.4.1 in ./venv/lib/python3.12/site-packages (from chromadb) (1.4.3)
+Requirement already satisfied: uvicorn>=0.18.3 in ./venv/lib/python3.12/site-packages (from uvicorn[standard]>=0.18.3->chromadb) (0.42.0)
+Requirement already satisfied: typing-extensions>=4.5.0 in ./venv/lib/python3.12/site-packages (from chromadb) (4.15.0)
+Requirement already satisfied: onnxruntime>=1.14.1 in ./venv/lib/python3.12/site-packages (from chromadb) (1.24.4)
+Requirement already satisfied: opentelemetry-api>=1.2.0 in ./venv/lib/python3.12/site-packages (from chromadb) (1.40.0)
+Requirement already satisfied: opentelemetry-exporter-otlp-proto-grpc>=1.2.0 in ./venv/lib/python3.12/site-packages (from chromadb) (1.40.0)
+Requirement already satisfied: opentelemetry-sdk>=1.2.0 in ./venv/lib/python3.12/site-packages (from chromadb) (1.40.0)
+Requirement already satisfied: tokenizers>=0.13.2 in ./venv/lib/python3.12/site-packages (from chromadb) (0.22.2)
+Requirement already satisfied: pypika>=0.48.9 in ./venv/lib/python3.12/site-packages (from chromadb) (0.51.1)
+Requirement already satisfied: tqdm>=4.65.0 in ./venv/lib/python3.12/site-packages (from chromadb) (4.67.3)
+Requirement already satisfied: overrides>=7.3.1 in ./venv/lib/python3.12/site-packages (from chromadb) (7.7.0)
+Requirement already satisfied: importlib-resources in ./venv/lib/python3.12/site-packages (from chromadb) (6.5.2)
+Requirement already satisfied: grpcio>=1.58.0 in ./venv/lib/python3.12/site-packages (from chromadb) (1.78.0)
+Requirement already satisfied: bcrypt>=4.0.1 in ./venv/lib/python3.12/site-packages (from chromadb) (5.0.0)
+Requirement already satisfied: typer>=0.9.0 in ./venv/lib/python3.12/site-packages (from chromadb) (0.24.1)
+Requirement already satisfied: kubernetes>=28.1.0 in ./venv/lib/python3.12/site-packages (from chromadb) (35.0.0)
+Requirement already satisfied: tenacity>=8.2.3 in ./venv/lib/python3.12/site-packages (from chromadb) (9.1.4)
+Requirement already satisfied: pyyaml>=6.0.0 in ./venv/lib/python3.12/site-packages (from chromadb) (6.0.3)
+Requirement already satisfied: mmh3>=4.0.1 in ./venv/lib/python3.12/site-packages (from chromadb) (5.2.1)
+Requirement already satisfied: orjson>=3.9.12 in ./venv/lib/python3.12/site-packages (from chromadb) (3.11.7)
+Requirement already satisfied: httpx>=0.27.0 in ./venv/lib/python3.12/site-packages (from chromadb) (0.28.1)
+Requirement already satisfied: rich>=10.11.0 in ./venv/lib/python3.12/site-packages (from chromadb) (14.3.3)
+Requirement already satisfied: jsonschema>=4.19.0 in ./venv/lib/python3.12/site-packages (from chromadb) (4.26.0)
+Requirement already satisfied: transformers<6.0.0,>=4.41.0 in ./venv/lib/python3.12/site-packages (from sentence-transformers) (5.4.0)
+Requirement already satisfied: huggingface-hub>=0.20.0 in ./venv/lib/python3.12/site-packages (from sentence-transformers) (1.8.0)
+Requirement already satisfied: torch>=1.11.0 in ./venv/lib/python3.12/site-packages (from sentence-transformers) (2.11.0)
+Requirement already satisfied: scikit-learn in ./venv/lib/python3.12/site-packages (from sentence-transformers) (1.8.0)
+Requirement already satisfied: scipy in ./venv/lib/python3.12/site-packages (from sentence-transformers) (1.17.1)
+Requirement already satisfied: packaging>=20.0 in ./venv/lib/python3.12/site-packages (from transformers<6.0.0,>=4.41.0->sentence-transformers) (26.0)
+Requirement already satisfied: regex>=2025.10.22 in ./venv/lib/python3.12/site-packages (from transformers<6.0.0,>=4.41.0->sentence-transformers) (2026.2.28)
+Requirement already satisfied: safetensors>=0.4.3 in ./venv/lib/python3.12/site-packages (from transformers<6.0.0,>=4.41.0->sentence-transformers) (0.7.0)
+Requirement already satisfied: filelock>=3.10.0 in ./venv/lib/python3.12/site-packages (from huggingface-hub>=0.20.0->sentence-transformers) (3.25.2)
+Requirement already satisfied: fsspec>=2023.5.0 in ./venv/lib/python3.12/site-packages (from huggingface-hub>=0.20.0->sentence-transformers) (2026.2.0)
+Requirement already satisfied: hf-xet<2.0.0,>=1.4.2 in ./venv/lib/python3.12/site-packages (from huggingface-hub>=0.20.0->sentence-transformers) (1.4.2)
+Requirement already satisfied: anyio in ./venv/lib/python3.12/site-packages (from httpx>=0.27.0->chromadb) (4.13.0)
+Requirement already satisfied: certifi in ./venv/lib/python3.12/site-packages (from httpx>=0.27.0->chromadb) (2026.2.25)
+Requirement already satisfied: httpcore==1.* in ./venv/lib/python3.12/site-packages (from httpx>=0.27.0->chromadb) (1.0.9)
+Requirement already satisfied: idna in ./venv/lib/python3.12/site-packages (from httpx>=0.27.0->chromadb) (3.11)
+Requirement already satisfied: h11>=0.16 in ./venv/lib/python3.12/site-packages (from httpcore==1.*->httpx>=0.27.0->chromadb) (0.16.0)
+Requirement already satisfied: langchain-core<2.0.0,>=1.2.10 in ./venv/lib/python3.12/site-packages (from langchain) (1.2.22)
+Requirement already satisfied: langgraph<1.2.0,>=1.1.1 in ./venv/lib/python3.12/site-packages (from langchain) (1.1.3)
+Requirement already satisfied: jsonpatch<2.0.0,>=1.33.0 in ./venv/lib/python3.12/site-packages (from langchain-core<2.0.0,>=1.2.10->langchain) (1.33)
+Requirement already satisfied: langsmith<1.0.0,>=0.3.45 in ./venv/lib/python3.12/site-packages (from langchain-core<2.0.0,>=1.2.10->langchain) (0.7.22)
+Requirement already satisfied: uuid-utils<1.0,>=0.12.0 in ./venv/lib/python3.12/site-packages (from langchain-core<2.0.0,>=1.2.10->langchain) (0.14.1)
+Requirement already satisfied: jsonpointer>=1.9 in ./venv/lib/python3.12/site-packages (from jsonpatch<2.0.0,>=1.33.0->langchain-core<2.0.0,>=1.2.10->langchain) (3.1.1)
+Requirement already satisfied: langgraph-checkpoint<5.0.0,>=2.1.0 in ./venv/lib/python3.12/site-packages (from langgraph<1.2.0,>=1.1.1->langchain) (4.0.1)
+Requirement already satisfied: langgraph-prebuilt<1.1.0,>=1.0.8 in ./venv/lib/python3.12/site-packages (from langgraph<1.2.0,>=1.1.1->langchain) (1.0.8)
+Requirement already satisfied: langgraph-sdk<0.4.0,>=0.3.0 in ./venv/lib/python3.12/site-packages (from langgraph<1.2.0,>=1.1.1->langchain) (0.3.12)
+Requirement already satisfied: xxhash>=3.5.0 in ./venv/lib/python3.12/site-packages (from langgraph<1.2.0,>=1.1.1->langchain) (3.6.0)
+Requirement already satisfied: ormsgpack>=1.12.0 in ./venv/lib/python3.12/site-packages (from langgraph-checkpoint<5.0.0,>=2.1.0->langgraph<1.2.0,>=1.1.1->langchain) (1.12.2)
+Requirement already satisfied: requests-toolbelt>=1.0.0 in ./venv/lib/python3.12/site-packages (from langsmith<1.0.0,>=0.3.45->langchain-core<2.0.0,>=1.2.10->langchain) (1.0.0)
+Requirement already satisfied: requests>=2.0.0 in ./venv/lib/python3.12/site-packages (from langsmith<1.0.0,>=0.3.45->langchain-core<2.0.0,>=1.2.10->langchain) (2.33.0)
+Requirement already satisfied: zstandard>=0.23.0 in ./venv/lib/python3.12/site-packages (from langsmith<1.0.0,>=0.3.45->langchain-core<2.0.0,>=1.2.10->langchain) (0.25.0)
+Requirement already satisfied: annotated-types>=0.6.0 in ./venv/lib/python3.12/site-packages (from pydantic>=2.0->chromadb) (0.7.0)
+Requirement already satisfied: pydantic-core==2.41.5 in ./venv/lib/python3.12/site-packages (from pydantic>=2.0->chromadb) (2.41.5)
+Requirement already satisfied: typing-inspection>=0.4.2 in ./venv/lib/python3.12/site-packages (from pydantic>=2.0->chromadb) (0.4.2)
+Requirement already satisfied: openai<3.0.0,>=2.26.0 in ./venv/lib/python3.12/site-packages (from langchain-openai) (2.30.0)
+Requirement already satisfied: tiktoken<1.0.0,>=0.7.0 in ./venv/lib/python3.12/site-packages (from langchain-openai) (0.12.0)
+Requirement already satisfied: distro<2,>=1.7.0 in ./venv/lib/python3.12/site-packages (from openai<3.0.0,>=2.26.0->langchain-openai) (1.9.0)
+Requirement already satisfied: jiter<1,>=0.10.0 in ./venv/lib/python3.12/site-packages (from openai<3.0.0,>=2.26.0->langchain-openai) (0.13.0)
+Requirement already satisfied: sniffio in ./venv/lib/python3.12/site-packages (from openai<3.0.0,>=2.26.0->langchain-openai) (1.3.1)
+Requirement already satisfied: langchain-classic<2.0.0,>=1.0.0 in ./venv/lib/python3.12/site-packages (from langchain-community) (1.0.3)
+Requirement already satisfied: SQLAlchemy<3.0.0,>=1.4.0 in ./venv/lib/python3.12/site-packages (from langchain-community) (2.0.48)
+Requirement already satisfied: aiohttp<4.0.0,>=3.8.3 in ./venv/lib/python3.12/site-packages (from langchain-community) (3.13.3)
+Requirement already satisfied: dataclasses-json<0.7.0,>=0.6.7 in ./venv/lib/python3.12/site-packages (from langchain-community) (0.6.7)
+Requirement already satisfied: httpx-sse<1.0.0,>=0.4.0 in ./venv/lib/python3.12/site-packages (from langchain-community) (0.4.3)
+Requirement already satisfied: aiohappyeyeballs>=2.5.0 in ./venv/lib/python3.12/site-packages (from aiohttp<4.0.0,>=3.8.3->langchain-community) (2.6.1)
+Requirement already satisfied: aiosignal>=1.4.0 in ./venv/lib/python3.12/site-packages (from aiohttp<4.0.0,>=3.8.3->langchain-community) (1.4.0)
+Requirement already satisfied: attrs>=17.3.0 in ./venv/lib/python3.12/site-packages (from aiohttp<4.0.0,>=3.8.3->langchain-community) (26.1.0)
+Requirement already satisfied: frozenlist>=1.1.1 in ./venv/lib/python3.12/site-packages (from aiohttp<4.0.0,>=3.8.3->langchain-community) (1.8.0)
+Requirement already satisfied: multidict<7.0,>=4.5 in ./venv/lib/python3.12/site-packages (from aiohttp<4.0.0,>=3.8.3->langchain-community) (6.7.1)
+Requirement already satisfied: propcache>=0.2.0 in ./venv/lib/python3.12/site-packages (from aiohttp<4.0.0,>=3.8.3->langchain-community) (0.4.1)
+Requirement already satisfied: yarl<2.0,>=1.17.0 in ./venv/lib/python3.12/site-packages (from aiohttp<4.0.0,>=3.8.3->langchain-community) (1.23.0)
+Requirement already satisfied: marshmallow<4.0.0,>=3.18.0 in ./venv/lib/python3.12/site-packages (from dataclasses-json<0.7.0,>=0.6.7->langchain-community) (3.26.2)
+Requirement already satisfied: typing-inspect<1,>=0.4.0 in ./venv/lib/python3.12/site-packages (from dataclasses-json<0.7.0,>=0.6.7->langchain-community) (0.9.0)
+Requirement already satisfied: langchain-text-splitters<2.0.0,>=1.1.1 in ./venv/lib/python3.12/site-packages (from langchain-classic<2.0.0,>=1.0.0->langchain-community) (1.1.1)
+Requirement already satisfied: python-dotenv>=0.21.0 in ./venv/lib/python3.12/site-packages (from pydantic-settings>=2.0->chromadb) (1.2.2)
+Requirement already satisfied: charset_normalizer<4,>=2 in ./venv/lib/python3.12/site-packages (from requests>=2.0.0->langsmith<1.0.0,>=0.3.45->langchain-core<2.0.0,>=1.2.10->langchain) (3.4.6)
+Requirement already satisfied: urllib3<3,>=1.26 in ./venv/lib/python3.12/site-packages (from requests>=2.0.0->langsmith<1.0.0,>=0.3.45->langchain-core<2.0.0,>=1.2.10->langchain) (2.6.3)
+Requirement already satisfied: greenlet>=1 in ./venv/lib/python3.12/site-packages (from SQLAlchemy<3.0.0,>=1.4.0->langchain-community) (3.3.2)
+Requirement already satisfied: mypy-extensions>=0.3.0 in ./venv/lib/python3.12/site-packages (from typing-inspect<1,>=0.4.0->dataclasses-json<0.7.0,>=0.6.7->langchain-community) (1.1.0)
+Requirement already satisfied: pyproject_hooks in ./venv/lib/python3.12/site-packages (from build>=1.0.3->chromadb) (1.2.0)
+Requirement already satisfied: jsonschema-specifications>=2023.03.6 in ./venv/lib/python3.12/site-packages (from jsonschema>=4.19.0->chromadb) (2025.9.1)
+Requirement already satisfied: referencing>=0.28.4 in ./venv/lib/python3.12/site-packages (from jsonschema>=4.19.0->chromadb) (0.37.0)
+Requirement already satisfied: rpds-py>=0.25.0 in ./venv/lib/python3.12/site-packages (from jsonschema>=4.19.0->chromadb) (0.30.0)
+Requirement already satisfied: six>=1.9.0 in ./venv/lib/python3.12/site-packages (from kubernetes>=28.1.0->chromadb) (1.17.0)
+Requirement already satisfied: python-dateutil>=2.5.3 in ./venv/lib/python3.12/site-packages (from kubernetes>=28.1.0->chromadb) (2.9.0.post0)
+Requirement already satisfied: websocket-client!=0.40.0,!=0.41.*,!=0.42.*,>=0.32.0 in ./venv/lib/python3.12/site-packages (from kubernetes>=28.1.0->chromadb) (1.9.0)
+Requirement already satisfied: requests-oauthlib in ./venv/lib/python3.12/site-packages (from kubernetes>=28.1.0->chromadb) (2.0.0)
+Requirement already satisfied: durationpy>=0.7 in ./venv/lib/python3.12/site-packages (from kubernetes>=28.1.0->chromadb) (0.10)
+Requirement already satisfied: flatbuffers in ./venv/lib/python3.12/site-packages (from onnxruntime>=1.14.1->chromadb) (25.12.19)
+Requirement already satisfied: protobuf in ./venv/lib/python3.12/site-packages (from onnxruntime>=1.14.1->chromadb) (6.33.6)
+Requirement already satisfied: sympy in ./venv/lib/python3.12/site-packages (from onnxruntime>=1.14.1->chromadb) (1.14.0)
+Requirement already satisfied: importlib-metadata<8.8.0,>=6.0 in ./venv/lib/python3.12/site-packages (from opentelemetry-api>=1.2.0->chromadb) (8.7.1)
+Requirement already satisfied: zipp>=3.20 in ./venv/lib/python3.12/site-packages (from importlib-metadata<8.8.0,>=6.0->opentelemetry-api>=1.2.0->chromadb) (3.23.0)
+Requirement already satisfied: googleapis-common-protos~=1.57 in ./venv/lib/python3.12/site-packages (from opentelemetry-exporter-otlp-proto-grpc>=1.2.0->chromadb) (1.73.1)
+Requirement already satisfied: opentelemetry-exporter-otlp-proto-common==1.40.0 in ./venv/lib/python3.12/site-packages (from opentelemetry-exporter-otlp-proto-grpc>=1.2.0->chromadb) (1.40.0)
+Requirement already satisfied: opentelemetry-proto==1.40.0 in ./venv/lib/python3.12/site-packages (from opentelemetry-exporter-otlp-proto-grpc>=1.2.0->chromadb) (1.40.0)
+Requirement already satisfied: opentelemetry-semantic-conventions==0.61b0 in ./venv/lib/python3.12/site-packages (from opentelemetry-sdk>=1.2.0->chromadb) (0.61b0)
+Requirement already satisfied: markdown-it-py>=2.2.0 in ./venv/lib/python3.12/site-packages (from rich>=10.11.0->chromadb) (4.0.0)
+Requirement already satisfied: pygments<3.0.0,>=2.13.0 in ./venv/lib/python3.12/site-packages (from rich>=10.11.0->chromadb) (2.19.2)
+Requirement already satisfied: mdurl~=0.1 in ./venv/lib/python3.12/site-packages (from markdown-it-py>=2.2.0->rich>=10.11.0->chromadb) (0.1.2)
+Requirement already satisfied: setuptools<82 in ./venv/lib/python3.12/site-packages (from torch>=1.11.0->sentence-transformers) (81.0.0)
+Requirement already satisfied: networkx>=2.5.1 in ./venv/lib/python3.12/site-packages (from torch>=1.11.0->sentence-transformers) (3.6.1)
+Requirement already satisfied: jinja2 in ./venv/lib/python3.12/site-packages (from torch>=1.11.0->sentence-transformers) (3.1.6)
+Requirement already satisfied: cuda-toolkit==13.0.2 in ./venv/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=1.11.0->sentence-transformers) (13.0.2)
+Requirement already satisfied: cuda-bindings<14,>=13.0.3 in ./venv/lib/python3.12/site-packages (from torch>=1.11.0->sentence-transformers) (13.2.0)
+Requirement already satisfied: nvidia-cudnn-cu13==9.19.0.56 in ./venv/lib/python3.12/site-packages (from torch>=1.11.0->sentence-transformers) (9.19.0.56)
+Requirement already satisfied: nvidia-cusparselt-cu13==0.8.0 in ./venv/lib/python3.12/site-packages (from torch>=1.11.0->sentence-transformers) (0.8.0)
+Requirement already satisfied: nvidia-nccl-cu13==2.28.9 in ./venv/lib/python3.12/site-packages (from torch>=1.11.0->sentence-transformers) (2.28.9)
+Requirement already satisfied: nvidia-nvshmem-cu13==3.4.5 in ./venv/lib/python3.12/site-packages (from torch>=1.11.0->sentence-transformers) (3.4.5)
+Requirement already satisfied: triton==3.6.0 in ./venv/lib/python3.12/site-packages (from torch>=1.11.0->sentence-transformers) (3.6.0)
+Requirement already satisfied: nvidia-cublas==13.1.0.3.* in ./venv/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=1.11.0->sentence-transformers) (13.1.0.3)
+Requirement already satisfied: nvidia-cuda-runtime==13.0.96.* in ./venv/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=1.11.0->sentence-transformers) (13.0.96)
+Requirement already satisfied: nvidia-cufft==12.0.0.61.* in ./venv/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=1.11.0->sentence-transformers) (12.0.0.61)
+Requirement already satisfied: nvidia-cufile==1.15.1.6.* in ./venv/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=1.11.0->sentence-transformers) (1.15.1.6)
+Requirement already satisfied: nvidia-cuda-cupti==13.0.85.* in ./venv/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=1.11.0->sentence-transformers) (13.0.85)
+Requirement already satisfied: nvidia-curand==10.4.0.35.* in ./venv/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=1.11.0->sentence-transformers) (10.4.0.35)
+Requirement already satisfied: nvidia-cusolver==12.0.4.66.* in ./venv/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=1.11.0->sentence-transformers) (12.0.4.66)
+Requirement already satisfied: nvidia-cusparse==12.6.3.3.* in ./venv/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=1.11.0->sentence-transformers) (12.6.3.3)
+Requirement already satisfied: nvidia-nvjitlink==13.0.88.* in ./venv/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=1.11.0->sentence-transformers) (13.0.88)
+Requirement already satisfied: nvidia-cuda-nvrtc==13.0.88.* in ./venv/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=1.11.0->sentence-transformers) (13.0.88)
+Requirement already satisfied: nvidia-nvtx==13.0.85.* in ./venv/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=1.11.0->sentence-transformers) (13.0.85)
+Requirement already satisfied: cuda-pathfinder~=1.1 in ./venv/lib/python3.12/site-packages (from cuda-bindings<14,>=13.0.3->torch>=1.11.0->sentence-transformers) (1.5.0)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in ./venv/lib/python3.12/site-packages (from sympy->onnxruntime>=1.14.1->chromadb) (1.3.0)
+Requirement already satisfied: click>=8.2.1 in ./venv/lib/python3.12/site-packages (from typer>=0.9.0->chromadb) (8.3.1)
+Requirement already satisfied: shellingham>=1.3.0 in ./venv/lib/python3.12/site-packages (from typer>=0.9.0->chromadb) (1.5.4)
+Requirement already satisfied: annotated-doc>=0.0.2 in ./venv/lib/python3.12/site-packages (from typer>=0.9.0->chromadb) (0.0.4)
+Requirement already satisfied: httptools>=0.6.3 in ./venv/lib/python3.12/site-packages (from uvicorn[standard]>=0.18.3->chromadb) (0.7.1)
+Requirement already satisfied: uvloop>=0.15.1 in ./venv/lib/python3.12/site-packages (from uvicorn[standard]>=0.18.3->chromadb) (0.22.1)
+Requirement already satisfied: watchfiles>=0.20 in ./venv/lib/python3.12/site-packages (from uvicorn[standard]>=0.18.3->chromadb) (1.1.1)
+Requirement already satisfied: websockets>=10.4 in ./venv/lib/python3.12/site-packages (from uvicorn[standard]>=0.18.3->chromadb) (16.0)
+Requirement already satisfied: MarkupSafe>=2.0 in ./venv/lib/python3.12/site-packages (from jinja2->torch>=1.11.0->sentence-transformers) (3.0.3)
+Requirement already satisfied: oauthlib>=3.0.0 in ./venv/lib/python3.12/site-packages (from requests-oauthlib->kubernetes>=28.1.0->chromadb) (3.3.1)
+Requirement already satisfied: joblib>=1.3.0 in ./venv/lib/python3.12/site-packages (from scikit-learn->sentence-transformers) (1.5.3)
+Requirement already satisfied: threadpoolctl>=3.2.0 in ./venv/lib/python3.12/site-packages (from scikit-learn->sentence-transformers) (3.6.0)
+
+root@controlplane ~ via 🐍 v3.12.3 (venv) ➜  python3 /root/code/verify_environment.py
+🔧 RAG Lab Environment Verification
+==================================================
+
+📋 Checking Python Environment:
+✅ Virtual environment is active
+
+📋 Checking Required Packages:
+✅ ChromaDB (vector database) available
+✅ Sentence Transformers (embeddings) available
+✅ LangChain (RAG framework) available
+✅ LangChain OpenAI (LLM integration) available
+✅ NumPy (vector operations) available
+
+📋 Checking OpenAI Configuration:
+✅ OpenAI configuration found
+   API Base: https://kodekey.ai.kodekloud.com/v1
+
+📋 Checking Document Repository:
+✅ TechCorp documents found: 15 files
+
+==================================================
+🎉 Environment ready for RAG lab!
+
+📊 Status: READY
+
+root@controlplane ~ via 🐍 v3.12.3 (venv) ➜  python3 /root/code/task_1_setup_vectorstore.py
+🔧 Task 1: Setting up Vector Store for RAG
+==================================================
+✅ ChromaDB client initialized
+✅ Collection 'techcorp_rag' ready
+modules.json: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 349/349 [00:00<00:00, 1.94MB/s]
+config_sentence_transformers.json: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████| 116/116 [00:00<00:00, 1.86MB/s]
+README.md: 10.5kB [00:00, 69.7MB/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+sentence_bert_config.json: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 53.0/53.0 [00:00<00:00, 946kB/s]
+config.json: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 612/612 [00:00<00:00, 10.6MB/s]
+model.safetensors: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 90.9M/90.9M [00:01<00:00, 63.7MB/s]
+Loading weights: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 103/103 [00:00<00:00, 23381.14it/s]
+BertModel LOAD REPORT from: sentence-transformers/all-MiniLM-L6-v2
+Key                     | Status     |  | 
+------------------------+------------+--+-
+embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:   can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+tokenizer_config.json: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 350/350 [00:00<00:00, 5.92MB/s]
+vocab.txt: 232kB [00:00, 102MB/s]
+tokenizer.json: 466kB [00:00, 196MB/s]
+special_tokens_map.json: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████| 112/112 [00:00<00:00, 1.89MB/s]
+config.json: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 190/190 [00:00<00:00, 2.47MB/s]
+✅ Embedding model loaded
+✅ Test embedding created: 384 dimensions
+
+==================================================
+🎉 SUCCESS! Your vector store is ready for RAG!
+   - ChromaDB initialized
+   - Collection: techcorp_rag
+   - Embedding model: all-MiniLM-L6-v2
+   - Vector dimensions: 384
+==================================================
+
+💡 Remember: You learned this in Vector Databases Lab - now applying it for RAG!
+
+✅ Task 1 completed!
+
+root@controlplane ~ via 🐍 v3.12.3 (venv) ➜  python3 /root/code/task_2_document_processing.py
+📄 Task 2: Smart Document Processing
+==================================================
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 103/103 [00:00<00:00, 18301.00it/s]
+BertModel LOAD REPORT from: sentence-transformers/all-MiniLM-L6-v2
+Key                     | Status     |  | 
+------------------------+------------+--+-
+embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:   can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+✅ Loaded vector store and embedding model
+
+📂 Processing employee-handbook:
+   ✅ remote-work-policy.md: 33 chunks
+   ✅ pet-policy.md: 18 chunks
+   ✅ benefits-overview.md: 27 chunks
+
+📂 Processing customer-faqs:
+   ✅ general-faqs.md: 43 chunks
+
+📂 Processing products:
+   ✅ cloudpro.md: 9 chunks
+   ✅ datasync.md: 7 chunks
+
+📂 Processing meeting-notes:
+   ✅ product-launch-review.md: 37 chunks
+   ✅ q3-planning-meeting.md: 33 chunks
+
+📂 Processing product-specs:
+   ✅ datavault.md: 44 chunks
+   ✅ cloudsync-pro.md: 36 chunks
+
+📂 Processing support:
+   ✅ faq.md: 10 chunks
+   ✅ troubleshooting.md: 11 chunks
+
+📂 Processing policies:
+   ✅ remote-work.md: 7 chunks
+   ✅ pet-policy.md: 5 chunks
+   ✅ vacation.md: 7 chunks
+
+==================================================
+🎉 Document Processing Complete!
+   - Documents processed: 15
+   - Total chunks created: 327
+   - Collection size: 327
+==================================================
+
+💡 Smart chunking preserves context for better generation!
+
+✅ Task 2 completed!
+
+root@controlplane ~ via 🐍 v3.12.3 (venv) ➜  python3 /root/code/task_3_llm_integration.py
+🤖 Task 3: LLM Integration
+==================================================
+✅ OpenAI client initialized
+   Using API: https://kodekey.ai.kodekloud.com/v1
+
+📝 Testing openai/gpt-4.1-mini with temperature=0.3
+
+🤖 Test Response: RAG (Retrieval-Augmented Generation) in AI is a technique that combines retrieval of relevant documents with generative models to produce more accurate and context-aware responses.
+
+==================================================
+🎉 LLM Integration Successful!
+   - Model: openai/gpt-4.1-mini
+   - Temperature: 0.3 (focused)
+   - Max tokens: 500 (concise)
+   - LangChain integration ready for RAG!
+==================================================
+
+💡 LLM ready to generate answers from retrieved context!
+
+✅ Task 3 completed!
+
+root@controlplane ~ via 🐍 v3.12.3 (venv) ➜  python3 /root/code/task_4_prompt_engineering.py
+📝 Task 4: Prompt Engineering
+==================================================
+✅ OpenAI client ready
+📋 System Prompt:
+----------------------------------------
+You are TechCorp's helpful AI assistant.
+Answer ONLY based on the provided context.
+If the answer is not in the context, say: 'I don't have that information in the provided documents.'
+Be concise and accurate.
+
+📋 User Prompt (with context):
+----------------------------------------
+
+Context from TechCorp documents:
+
+[Document 1]
+TechCorp allows employees to work remotely up to 3 days per week. Core hours are 10 AM to 3 PM.
+
+[Document 2]
+Remote work arrangements must be approved by your manager and documented with HR.
+
+[Document 3]
+VPN is mandatory when accessing company resources from home.
+
+
+
+Question: How many days can I work from home?
+
+Answer:
+
+🤖 Generated Answer:
+----------------------------------------
+You can work from home up to 3 days per week.
+
+==================================================
+🎉 Prompt Engineering Complete!
+   - System prompt: Context-aware
+   - User prompt: Structured with context
+   - Answer: Based on provided documents
+   - Ready for complete RAG pipeline!
+==================================================
+
+💡 The RAG prompt formula ensures accurate, context-based answers!
+
+✅ Task 4 completed!
+
+root@controlplane ~ via 🐍 v3.12.3 (venv) ➜  python3 /root/code/task_5_complete_rag.py
+🚀 Task 5: Complete RAG Pipeline
+==================================================
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 103/103 [00:00<00:00, 19125.79it/s]
+BertModel LOAD REPORT from: sentence-transformers/all-MiniLM-L6-v2
+Key                     | Status     |  | 
+------------------------+------------+--+-
+embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:   can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+✅ All components loaded
+
+📚 Database has 327 chunks ready
+
+📝 Question: 'Can I bring my dog to the office?'
+--------------------------------------------------
+1️⃣ RETRIEVE: Converting to embedding...
+   ✅ Retrieved 3 relevant chunks
+      - pet-policy.md (policies)
+      - pet-policy.md (employee-handbook)
+      - pet-policy.md (employee-handbook)
+
+2️⃣ AUGMENT: Building context...
+   ✅ Context prepared with retrieved documents
+
+3️⃣ GENERATE: Creating answer...
+
+==================================================
+💬 ANSWER:
+Yes, you can bring your dog to the office on Fridays, designated as "Furry Fridays," provided your dog is well-behaved, up-to-date on vaccinations, and has no history of aggression. You must register your dog with HR before the first visit by providing proof of vaccinations, a behavioral assessment form, and emergency contact information. Dogs are allowed in open office areas, designated pet zones, and outdoor spaces, but not in the cafeteria, conference rooms, or server rooms.
+
+📎 Sources: pet-policy.md
+==================================================
+
+📝 Question: 'How many vacation days do I get?'
+--------------------------------------------------
+1️⃣ RETRIEVE: Converting to embedding...
+   ✅ Retrieved 3 relevant chunks
+      - vacation.md (policies)
+      - vacation.md (policies)
+      - vacation.md (policies)
+
+2️⃣ AUGMENT: Building context...
+   ✅ Context prepared with retrieved documents
+
+3️⃣ GENERATE: Creating answer...
+
+==================================================
+💬 ANSWER:
+You receive 20 days of paid vacation per year as a full-time employee.
+
+📎 Sources: vacation.md
+==================================================
+
+📝 Question: 'What is the remote work policy?'
+--------------------------------------------------
+1️⃣ RETRIEVE: Converting to embedding...
+   ✅ Retrieved 3 relevant chunks
+      - remote-work-policy.md (employee-handbook)
+      - remote-work.md (policies)
+      - remote-work-policy.md (employee-handbook)
+
+2️⃣ AUGMENT: Building context...
+   ✅ Context prepared with retrieved documents
+
+3️⃣ GENERATE: Creating answer...
+
+==================================================
+💬 ANSWER:
+TechCorp's remote work policy embraces flexible work arrangements to promote work-life balance and productivity. It outlines a hybrid work model and remote work guidelines. During emergency situations such as weather or health emergencies, 100% remote work may be authorized, essential personnel are notified separately, and the business continuity plan is activated.
+
+📎 Sources: remote-work-policy.md, remote-work.md
+==================================================
+
+==================================================
+🎉 RAG Pipeline Complete!
+   - Retrieval: Semantic search working
+   - Augmentation: Context injection ready
+   - Generation: LLM producing answers
+   - Citations: Sources included
+==================================================
+
+🎯 You've built a complete RAG system - from search to answers!
+
+✅ Task 5 completed!
+
+root@controlplane ~ via 🐍 v3.12.3 (venv) ➜  

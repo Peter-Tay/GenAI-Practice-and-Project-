@@ -1,0 +1,115 @@
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ➜  python3 /root/code/task_2_mcp_langgraph.py
+🔌 Task 2: MCP and LangGraph Integration
+
+Building MCP-integrated agent:
+
+Starting MCP + LangGraph integration...
+Processing request of type ListToolsRequest
+✅ Agent created with MCP tools!
+
+============================================================
+TESTING MCP-INTEGRATED AGENT:
+============================================================
+
+Test 1: Math Query
+Processing request of type CallToolRequest
+Processing request of type ListToolsRequest
+Response: 25 plus 17 is 42.
+
+Test 2: Multiplication Query
+Processing request of type CallToolRequest
+Processing request of type ListToolsRequest
+Response: 8 times 9 is 72.
+
+Test 3: Complex Math
+Processing request of type CallToolRequest
+Processing request of type CallToolRequest
+Processing request of type ListToolsRequest
+Processing request of type ListToolsRequest
+Processing request of type CallToolRequest
+Processing request of type ListToolsRequest
+Response: (3 + 5) x 12 = 96
+
+Test 4: Non-Math Query
+Response: The capital of France is Paris.
+
+============================================================
+💡 KEY CONCEPTS:
+- MultiServerMCPClient connects to MCP servers
+- client.get_tools() loads tools from servers
+- create_react_agent builds agent with tools
+- Agent automatically routes to appropriate tools
+- MCP handles tool execution transparently
+============================================================
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ➜  python3 /root/code/task_3_multi_servers.py
+🌐 Task 3: Multiple MCP Servers
+
+Configuring multiple MCP servers:
+
+Starting Multi-Server MCP Orchestration...
+This demonstrates how a single agent can use multiple MCP servers
+
+📦 Loading tools from multiple servers...
+Processing request of type ListToolsRequest
+Processing request of type ListToolsRequest
+✅ Loaded 8 tools from MCP servers
+
+============================================================
+TESTING MULTI-SERVER ORCHESTRATION:
+============================================================
+
+Test 1: Calculator MCP
+Processing request of type CallToolRequest
+Processing request of type ListToolsRequest
+Response: 42 plus 58 is 100.
+
+Test 2: Weather MCP
+Processing request of type CallToolRequest
+Processing request of type ListToolsRequest
+Response: The current weather in London is foggy with a temperature of 20°C. The humidity is at 42%, and there is a light wind blowing at 6 km/h.
+
+Test 3: Complex Math
+Processing request of type CallToolRequest
+Processing request of type ListToolsRequest
+Processing request of type CallToolRequest
+Processing request of type ListToolsRequest
+Response: (3 + 5) x 12 = 96
+
+Test 4: Weather in Multiple Cities
+Processing request of type CallToolRequest
+Processing request of type ListToolsRequest
+Processing request of type CallToolRequest
+Processing request of type ListToolsRequest
+Response: The current weather comparison between New York and Tokyo is as follows:
+
+New York:
+- Temperature: 17°C
+- Condition: Windy
+- Humidity: 76%
+- Wind Speed: 8 km/h
+
+Tokyo:
+- Temperature: 22°C
+- Condition: Clear
+- Humidity: 60%
+- Wind Speed: 15 km/h
+
+Tokyo is warmer and clearer with less humidity but stronger wind compared to New York, which is cooler, windier, and more humid.
+
+Test 5: Mixed Query
+Processing request of type CallToolRequest
+Processing request of type ListToolsRequest
+Response: If the temperature in Paris is 20°C and it rises by 5 degrees, the new temperature will be 25°C.
+
+============================================================
+💡 KEY CONCEPTS:
+- MultiServerMCPClient manages multiple MCP servers
+- Each server exposes different tools
+- Agent automatically selects appropriate tools
+- Seamless orchestration across servers
+- Extensible to many servers and domains
+============================================================
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ➜  

@@ -1,0 +1,57 @@
+#!/usr/bin/env python3
+"""Task 1: Understanding Imports - Setting up LangGraph basics"""
+
+import os
+
+# ╔════════════════════════════════════════╗
+# ║     LangGraph Import Structure         ║
+# ╠════════════════════════════════════════╣
+# ║                                        ║
+# ║  langgraph.graph                       ║
+# ║      ├── StateGraph (Class)           ║
+# ║      │    └─ Creates workflow graphs  ║
+# ║      └── END (Constant)               ║
+# ║           └─ Marks graph termination  ║
+# ║                                        ║
+# ║  typing.TypedDict                      ║
+# ║      └── For defining State structure ║
+# ║           └─ Type-safe state schema   ║
+# ║                                        ║
+# ╚════════════════════════════════════════╝
+
+print("📚 Task 1: Understanding Imports\n")
+
+# Import StateGraph and END from langgraph.graph
+from langgraph.graph import StateGraph, END
+
+# Import TypedDict from typing
+from typing import TypedDict
+
+# Define State with messages list
+class State(TypedDict):
+    messages: list
+    next_step: str
+
+# Test that imports work
+print("Testing imports...")
+try:
+    test_graph = StateGraph(State)
+    print("✅ StateGraph imported successfully!")
+    print(f"✅ State has fields: {list(State.__annotations__.keys())}")
+    print(f"✅ END constant is available: {END}")
+except:
+    print("❌ Complete the TODOs to make imports work!")
+
+print("\n" + "=" * 60)
+print("💡 KEY CONCEPTS:")
+print("- StateGraph: Creates stateful workflow graphs")
+print("- END: Marks the final node in a graph")
+print("- TypedDict: Defines the structure of our state")
+print("- State: Data that flows through all nodes")
+print("=" * 60)
+
+os.makedirs("/root/markers", exist_ok=True)
+with open("/root/markers/task1_imports_complete.txt", "w") as f:
+    f.write("TASK1_COMPLETE")
+
+print("\n✅ Task 1 completed!")

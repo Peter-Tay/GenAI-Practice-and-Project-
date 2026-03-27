@@ -1,0 +1,88 @@
+  
+root@controlplane ~/code via 🐍 v3.12.3 ➜  source /root/venv/bin/activate && python3 /root/code/verify_environment.py
+============================================================
+🔧 AI Lab - Environment Setup & Verification
+============================================================
+
+🐍 Virtual Environment Check:
+  ✅ Virtual environment active: /root/venv
+✅ Python 3.12.3
+
+📦 Checking OpenAI Package:
+  ✅ openai package installed (version 2.30.0)
+
+🔑 Checking API Configuration:
+  ✅ OPENAI_API_KEY is configured (102 chars)
+  ✅ OPENAI_API_BASE is configured: https://kodekey.ai.kodekloud.com/v1
+
+🔬 Testing OpenAI Import:
+  ✅ Successfully imported openai module
+
+============================================================
+📊 Environment Check Summary
+============================================================
+  Python Version: ✅ PASS
+  OpenAI Package: ✅ PASS
+  API Configuration: ✅ PASS
+  Import Test: ✅ PASS
+
+============================================================
+🎉 Environment setup completed successfully!
+✅ You're ready to start the AI tasks!
+============================================================
+
+💡 Remember: Keep the virtual environment activated
+   for all upcoming tasks!
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ➜  python3 /root/code/task_1_import_setup.py
+✅ Step 1 Complete: Libraries imported!
+- openai: For making API calls
+- os: For accessing environment variables
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ➜  python3 /root/code/task_2_client_initialization.py
+✅ Step 2 Complete: Connected to OpenAI!
+- API Key: Sk-kkAI-bb...
+- Base URL: https://kodekey.ai.kodekloud.com/v1
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ➜  python3 /root/code/task_3_api_call_explained.py
+✅ API Call Successful!
+
+🤖 AI said: Hello! I’m ChatGPT, an AI language model created by OpenAI. I’m here to help you with information, answer questions, generate text, and assist with a wide variety of tasks. How can I assist you today?
+
+📊 Total tokens used: 61
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ➜  python3 /root/code/task_4_extract_response.py
+🎯 Successfully extracted the AI's response!
+
+============================================================
+Question: What is Python in one sentence?
+
+AI's Answer:
+Python is a high-level, interpreted programming language known for its simplicity, readability, and versatility in various applications such as web development, data analysis, artificial intelligence, and automation.
+============================================================
+
+🔑 THE GOLDEN PATH - Memorize this:
+   response.choices[0].message.content
+
+   This path works for EVERY chat completion response!
+
+✅ Task 4 completed! You now know how to extract AI responses!
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ➜  python3 /root/code/task_5_tokens_and_costs.py
+📊 Token Usage Report:
+==================================================
+  Your question used: 19 tokens
+  AI's response used: 331 tokens
+  Total tokens billed: 350 tokens
+==================================================
+
+💰 Cost Breakdown for This Call:
+--------------------------------------------------
+  Input cost:  $0.000015 (19 tokens)
+  Output cost: $0.001059 (331 tokens)
+  TOTAL COST:  $0.001074
+--------------------------------------------------
+
+✅ Task 5 completed! You now understand tokens and costs!
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ➜  

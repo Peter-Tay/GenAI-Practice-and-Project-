@@ -1,0 +1,241 @@
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ➜  source /root/venv/bin/activate && python /root/code/verify_environment.py
+🔍 Verifying LangChain Lab Environment
+============================================================
+✅ Python version: 3.12.3
+
+📦 Virtual Environment Check:
+✅ Running in virtual environment
+
+📚 Required Packages:
+✅ OpenAI SDK (openai) - Installed
+✅ LangChain Core (langchain) - Installed
+✅ LangChain OpenAI (langchain_openai) - Installed
+✅ Data Validation (pydantic) - Installed
+
+🔑 API Configuration:
+✅ OPENAI_API_KEY - Configured
+✅ OPENAI_API_BASE - Configured
+
+📁 Required Directories:
+✅ /root/markers - Exists
+✅ /root/code - Exists
+
+============================================================
+🎉 ENVIRONMENT READY!
+
+You can now proceed with the LangChain tasks:
+  - Task 1: OpenAI vs LangChain comparison
+  - Task 2: Multi-model support
+  - Task 3: Prompt templates
+  - Task 4: Output parsers
+  - Task 5: Complete chain composition
+
+💡 Remember to activate the virtual environment:
+   source /root/venv/bin/activate
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ➜  python /root/code/task_1_openai_vs_langchain.py
+🎯 Task 1: OpenAI SDK vs LangChain Comparison
+==================================================
+
+🔴 RAW OPENAI SDK APPROACH
+Response: Machine learning is a branch of artificial intelligence where computer algorithms automatically lear...
+
+🟢 LANGCHAIN APPROACH
+Response: Machine learning is a branch of artificial intelligence where computers learn to recognize patterns ...
+
+📊 COMPARISON:
+✅ Both approaches work, but LangChain is:
+  - 70% less code
+  - Cleaner response handling
+  - Provider agnostic
+
+✅ Task 1 completed!
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ➜  python /root/code/task_2_multi_model.py
+🎯 Task 2: Multi-Model Support with LangChain
+==================================================
+
+🌐 Initialize Multiple AI Providers
+==================================================
+Setting up OpenAI GPT-4.1-mini...
+Setting up Google Gemini...
+Setting up X.AI Grok...
+
+✅ All models initialized! Now let's compare them...
+
+Model Comparison - Same Prompt, Different Models
+==================================================
+📝 Prompt: 'Explain cloud computing in one sentence'
+
+OpenAI: Cloud computing is the delivery of computing services like storage, processing, and software over th...
+Traceback (most recent call last):
+  File "/root/code/task_2_multi_model.py", line 75, in <module>
+    main()
+  File "/root/code/task_2_multi_model.py", line 57, in main
+    response = google_llm.invoke(test_prompt)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 454, in invoke
+    self.generate_prompt(
+  File "/root/venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 1201, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 1010, in generate
+    self._generate_with_cache(
+  File "/root/venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 1313, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "/root/venv/lib/python3.12/site-packages/langchain_openai/chat_models/base.py", line 1488, in _generate
+    _handle_openai_api_error(e)
+  File "/root/venv/lib/python3.12/site-packages/langchain_openai/chat_models/base.py", line 1483, in _generate
+    raw_response = self.client.with_raw_response.create(**payload)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/venv/lib/python3.12/site-packages/openai/_legacy_response.py", line 367, in wrapped
+    return cast(LegacyAPIResponse[R], func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/venv/lib/python3.12/site-packages/openai/_utils/_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/venv/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 1211, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/root/venv/lib/python3.12/site-packages/openai/_base_client.py", line 1297, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/venv/lib/python3.12/site-packages/openai/_base_client.py", line 1070, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.PermissionDeniedError: Error code: 403 - {'detail': "Model 'oogle/gemini-2.5-flash' is not supported."}
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ✖ python /root/code/task_2_multi_model.py
+🎯 Task 2: Multi-Model Support with LangChain
+==================================================
+
+🌐 Initialize Multiple AI Providers
+==================================================
+Setting up OpenAI GPT-4.1-mini...
+Setting up Google Gemini...
+Setting up X.AI Grok...
+
+✅ All models initialized! Now let's compare them...
+
+Model Comparison - Same Prompt, Different Models
+==================================================
+📝 Prompt: 'Explain cloud computing in one sentence'
+
+OpenAI: Cloud computing is the delivery of computing services, such as storage, processing, and software, ov...
+Google: Cloud computing delivers on-demand computing services—including servers, storage, databases, network...
+X.AI: Cloud computing is a model for delivering on-demand computing resources, such as servers, storage, d...
+
+💡 Same code, different providers - perfect for A/B testing!
+
+✅ Task 2 completed! You can now switch models at will!
+🎉 You tested 3 different AI providers with identical code!
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ➜  python /root/code/task_3_prompt_templates.py
+🎯 Task 3: Dynamic Prompt Templates
+==================================================
+
+📝 Creating a Reusable Template
+==================================================
+
+🤖 Testing Template with AI
+==================================================
+📝 Sending to AI: Explain artificial intelligence in exactly 5 words
+
+🤖 AI Response: Machines simulating human-like intelligence.
+
+💡 Template Benefits:
+  ✓ ONE template, INFINITE uses
+  ✓ Variables make it dynamic
+  ✓ Consistent structure across all prompts
+  ✓ Change inputs, not code!
+
+✅ Task 3 completed! One template, endless possibilities!
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ➜  python /root/code/task_4_output_parsers.py
+🎯 Task 4: Output Parsers - Text to Data
+==================================================
+
+📋 List Output Parser
+==================================================
+✅ Input: 'List 3 benefits of cloud computing'
+✅ Parsed Output: ['Scalability', 'cost-efficiency', 'remote accessibility']
+✅ Type: <class 'list'> - It's a Python list!
+✅ Access items: result[0] = 'Scalability'
+
+📦 JSON Output Parser
+==================================================
+✅ Input: 'Analyze machine learning'
+Traceback (most recent call last):
+  File "/root/code/task_4_output_parsers.py", line 113, in <module>
+    main()
+  File "/root/code/task_4_output_parsers.py", line 88, in main
+    parsed = ___  # Replace ___ with: result (already a dict from json_parser!)
+             ^^^
+NameError: name '___' is not defined
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ✖ python /root/code/task_4_output_parsers.py
+🎯 Task 4: Output Parsers - Text to Data
+==================================================
+
+📋 List Output Parser
+==================================================
+✅ Input: 'List 3 benefits of cloud computing'
+✅ Parsed Output: ['Scalability', 'cost-efficiency', 'remote accessibility']
+✅ Type: <class 'list'> - It's a Python list!
+✅ Access items: result[0] = 'Scalability'
+
+📦 JSON Output Parser
+==================================================
+✅ Input: 'Analyze machine learning'
+✅ Parsed JSON Output:
+   Benefits: ['Ability to automatically learn and improve from experience without explicit programming', 'Can handle and analyze large and complex datasets to uncover patterns and insights']
+   Complexity: high
+   Use Case: Predictive analytics for customer behavior
+✅ Type: <class 'dict'> - It's a Python dict!
+
+💡 Parser Magic:
+  ✓ List parser: Text → Python list
+  ✓ JSON parser: Text → Python dict
+  ✓ Direct data access: result[0], parsed['benefits']
+  ✓ Ready for your application!
+
+✅ Task 4 completed! You can now parse AI outputs into data structures!
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ➜  python /root/code/task_5_complete_chain.py
+🎯 Task 5: Chain Composition with |
+==================================================
+
+⛓️ Chain 1: Simple Analysis
+==================================================
+📝 Input: 'Analyze blockchain'
+✅ Output: Blockchain is a decentralized digital ledger technology that ensures secure, transparent, and tamper-proof recording of transactions across multiple computers. Its pros include enhanced security, increased transparency, and reduced need for intermediaries, which can lower costs and improve efficiency. However, cons involve high energy consumption (especially in proof-of-work systems), scalability challenges, and regulatory uncertainties.
+
+⛓️ Chain 2: List Generation with Parser
+==================================================
+📝 Input: 'List use cases for blockchain'
+✅ Output: ['Supply chain management', 'digital identity verification', 'decentralized finance (DeFi)']
+✅ Type: <class 'list'> - Python list!
+
+🎉 Complete Pipeline Example
+==================================================
+Technology: artificial intelligence
+
+1️⃣ Analysis:
+   Artificial intelligence (AI) enhances efficiency and decision-making by automating complex tasks and processing vast amounts of data quickly. However, it also raises concerns such as job displacement, ethical dilemmas, and potential biases in algorithms. Balancing innovation with responsible use is crucial for maximizing AI’s benefits while minimizing its drawbacks.
+
+2️⃣ Use Cases:
+   1. natural language processing
+   2. image recognition
+   3. predictive analytics
+
+💡 Chain Composition Magic:
+  ✓ The pipe | operator connects everything
+  ✓ prompt | llm | parser = complete pipeline
+  ✓ Different parsers = different output formats
+  ✓ Same LLM, infinite possibilities!
+
+✅ Task 5 completed! You've mastered LangChain chains!
+🏆 You can now build any AI pipeline with the | operator!
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ➜  

@@ -1,0 +1,307 @@
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ➜  cd /root && source /root/venv/bin/activate
+
+root@controlplane ~ via 🐍 v3.12.3 (venv) ➜  pip install langgraph langchain langchain-openai duckduckgo-search
+Requirement already satisfied: langgraph in ./venv/lib/python3.12/site-packages (1.1.3)
+Requirement already satisfied: langchain in ./venv/lib/python3.12/site-packages (1.2.13)
+Requirement already satisfied: langchain-openai in ./venv/lib/python3.12/site-packages (1.1.12)
+Requirement already satisfied: duckduckgo-search in ./venv/lib/python3.12/site-packages (8.1.1)
+Requirement already satisfied: langchain-core>=0.1 in ./venv/lib/python3.12/site-packages (from langgraph) (1.2.22)
+Requirement already satisfied: langgraph-checkpoint<5.0.0,>=2.1.0 in ./venv/lib/python3.12/site-packages (from langgraph) (4.0.1)
+Requirement already satisfied: langgraph-prebuilt<1.1.0,>=1.0.8 in ./venv/lib/python3.12/site-packages (from langgraph) (1.0.8)
+Requirement already satisfied: langgraph-sdk<0.4.0,>=0.3.0 in ./venv/lib/python3.12/site-packages (from langgraph) (0.3.12)
+Requirement already satisfied: pydantic>=2.7.4 in ./venv/lib/python3.12/site-packages (from langgraph) (2.12.5)
+Requirement already satisfied: xxhash>=3.5.0 in ./venv/lib/python3.12/site-packages (from langgraph) (3.6.0)
+Requirement already satisfied: ormsgpack>=1.12.0 in ./venv/lib/python3.12/site-packages (from langgraph-checkpoint<5.0.0,>=2.1.0->langgraph) (1.12.2)
+Requirement already satisfied: httpx>=0.25.2 in ./venv/lib/python3.12/site-packages (from langgraph-sdk<0.4.0,>=0.3.0->langgraph) (0.28.1)
+Requirement already satisfied: orjson>=3.11.5 in ./venv/lib/python3.12/site-packages (from langgraph-sdk<0.4.0,>=0.3.0->langgraph) (3.11.7)
+Requirement already satisfied: jsonpatch<2.0.0,>=1.33.0 in ./venv/lib/python3.12/site-packages (from langchain-core>=0.1->langgraph) (1.33)
+Requirement already satisfied: langsmith<1.0.0,>=0.3.45 in ./venv/lib/python3.12/site-packages (from langchain-core>=0.1->langgraph) (0.7.22)
+Requirement already satisfied: packaging>=23.2.0 in ./venv/lib/python3.12/site-packages (from langchain-core>=0.1->langgraph) (26.0)
+Requirement already satisfied: pyyaml<7.0.0,>=5.3.0 in ./venv/lib/python3.12/site-packages (from langchain-core>=0.1->langgraph) (6.0.3)
+Requirement already satisfied: tenacity!=8.4.0,<10.0.0,>=8.1.0 in ./venv/lib/python3.12/site-packages (from langchain-core>=0.1->langgraph) (9.1.4)
+Requirement already satisfied: typing-extensions<5.0.0,>=4.7.0 in ./venv/lib/python3.12/site-packages (from langchain-core>=0.1->langgraph) (4.15.0)
+Requirement already satisfied: uuid-utils<1.0,>=0.12.0 in ./venv/lib/python3.12/site-packages (from langchain-core>=0.1->langgraph) (0.14.1)
+Requirement already satisfied: jsonpointer>=1.9 in ./venv/lib/python3.12/site-packages (from jsonpatch<2.0.0,>=1.33.0->langchain-core>=0.1->langgraph) (3.1.1)
+Requirement already satisfied: requests-toolbelt>=1.0.0 in ./venv/lib/python3.12/site-packages (from langsmith<1.0.0,>=0.3.45->langchain-core>=0.1->langgraph) (1.0.0)
+Requirement already satisfied: requests>=2.0.0 in ./venv/lib/python3.12/site-packages (from langsmith<1.0.0,>=0.3.45->langchain-core>=0.1->langgraph) (2.33.0)
+Requirement already satisfied: zstandard>=0.23.0 in ./venv/lib/python3.12/site-packages (from langsmith<1.0.0,>=0.3.45->langchain-core>=0.1->langgraph) (0.25.0)
+Requirement already satisfied: anyio in ./venv/lib/python3.12/site-packages (from httpx>=0.25.2->langgraph-sdk<0.4.0,>=0.3.0->langgraph) (4.13.0)
+Requirement already satisfied: certifi in ./venv/lib/python3.12/site-packages (from httpx>=0.25.2->langgraph-sdk<0.4.0,>=0.3.0->langgraph) (2026.2.25)
+Requirement already satisfied: httpcore==1.* in ./venv/lib/python3.12/site-packages (from httpx>=0.25.2->langgraph-sdk<0.4.0,>=0.3.0->langgraph) (1.0.9)
+Requirement already satisfied: idna in ./venv/lib/python3.12/site-packages (from httpx>=0.25.2->langgraph-sdk<0.4.0,>=0.3.0->langgraph) (3.11)
+Requirement already satisfied: h11>=0.16 in ./venv/lib/python3.12/site-packages (from httpcore==1.*->httpx>=0.25.2->langgraph-sdk<0.4.0,>=0.3.0->langgraph) (0.16.0)
+Requirement already satisfied: annotated-types>=0.6.0 in ./venv/lib/python3.12/site-packages (from pydantic>=2.7.4->langgraph) (0.7.0)
+Requirement already satisfied: pydantic-core==2.41.5 in ./venv/lib/python3.12/site-packages (from pydantic>=2.7.4->langgraph) (2.41.5)
+Requirement already satisfied: typing-inspection>=0.4.2 in ./venv/lib/python3.12/site-packages (from pydantic>=2.7.4->langgraph) (0.4.2)
+Requirement already satisfied: openai<3.0.0,>=2.26.0 in ./venv/lib/python3.12/site-packages (from langchain-openai) (2.30.0)
+Requirement already satisfied: tiktoken<1.0.0,>=0.7.0 in ./venv/lib/python3.12/site-packages (from langchain-openai) (0.12.0)
+Requirement already satisfied: distro<2,>=1.7.0 in ./venv/lib/python3.12/site-packages (from openai<3.0.0,>=2.26.0->langchain-openai) (1.9.0)
+Requirement already satisfied: jiter<1,>=0.10.0 in ./venv/lib/python3.12/site-packages (from openai<3.0.0,>=2.26.0->langchain-openai) (0.13.0)
+Requirement already satisfied: sniffio in ./venv/lib/python3.12/site-packages (from openai<3.0.0,>=2.26.0->langchain-openai) (1.3.1)
+Requirement already satisfied: tqdm>4 in ./venv/lib/python3.12/site-packages (from openai<3.0.0,>=2.26.0->langchain-openai) (4.67.3)
+Requirement already satisfied: regex>=2022.1.18 in ./venv/lib/python3.12/site-packages (from tiktoken<1.0.0,>=0.7.0->langchain-openai) (2026.2.28)
+Requirement already satisfied: click>=8.1.8 in ./venv/lib/python3.12/site-packages (from duckduckgo-search) (8.3.1)
+Requirement already satisfied: primp>=0.15.0 in ./venv/lib/python3.12/site-packages (from duckduckgo-search) (1.1.3)
+Requirement already satisfied: lxml>=5.3.0 in ./venv/lib/python3.12/site-packages (from duckduckgo-search) (6.0.2)
+Requirement already satisfied: charset_normalizer<4,>=2 in ./venv/lib/python3.12/site-packages (from requests>=2.0.0->langsmith<1.0.0,>=0.3.45->langchain-core>=0.1->langgraph) (3.4.6)
+Requirement already satisfied: urllib3<3,>=1.26 in ./venv/lib/python3.12/site-packages (from requests>=2.0.0->langsmith<1.0.0,>=0.3.45->langchain-core>=0.1->langgraph) (2.6.3)
+
+root@controlplane ~ via 🐍 v3.12.3 (venv) ➜  python3 /root/code/verify_environment.py
+🔧 Verifying LangGraph Lab Environment
+==================================================
+✓ Python version: 3.12.3
+
+📦 Checking installed packages:
+  ✓ langgraph: Stateful graph framework
+  ✓ langchain: LLM orchestration
+  ✓ langchain_openai: OpenAI integration
+  ✓ langchain_community: Community tools
+  ✓ duckduckgo_search: Web search (FREE!)
+  ✓ bs4: Web scraping
+  ✓ dotenv: Environment management
+
+🔑 Checking environment variables:
+  ✓ OPENAI_API_KEY: Sk-kkAI-...
+  ✓ OPENAI_API_BASE: https://...
+
+🤖 Available models via proxy:
+  • openai/gpt-4.1-mini
+  • openai/gpt-5-mini
+  • deepseek/deepseek-chat
+  • x-ai/grok-code-fast-1
+
+==================================================
+✅ Environment verification complete!
+🎉 All requirements satisfied - ready for LangGraph!
+
+📝 Marker file created: /root/markers/environment_verified.txt
+==================================================
+
+root@controlplane ~ via 🐍 v3.12.3 (venv) ➜  python3 /root/code/task_1_understanding_imports.py
+📚 Task 1: Understanding Imports
+
+Testing imports...
+✅ StateGraph imported successfully!
+✅ State has fields: ['messages', 'next_step']
+✅ END constant is available: __end__
+
+============================================================
+💡 KEY CONCEPTS:
+- StateGraph: Creates stateful workflow graphs
+- END: Marks the final node in a graph
+- TypedDict: Defines the structure of our state
+- State: Data that flows through all nodes
+============================================================
+
+✅ Task 1 completed!
+
+root@controlplane ~ via 🐍 v3.12.3 (venv) ➜  python3 /root/code/task_2_creating_nodes.py
+🔷 Task 2: Creating Your First Node
+
+Testing nodes manually:
+
+Initial state: {'name': 'Alice', 'greeting': ''}
+
+Calling greet_node...
+  🔄 Processing in greet_node...
+Node returned: {'greeting': 'Hello, Alice!'}
+State after greet: {'name': 'Alice', 'greeting': 'Hello, Alice!'}
+
+Calling enhance_node...
+  🔄 Processing in enhance_node...
+Node returned: {'greeting': 'Hello, Alice! How are you?'}
+Final state: {'name': 'Alice', 'greeting': 'Hello, Alice! How are you?'}
+
+============================================================
+💡 KEY CONCEPTS:
+- Nodes are Python functions that take state and return updates
+- We're testing functions here WITHOUT a graph
+- In Task 3, we'll add these functions to a StateGraph
+- LangGraph will handle state merging automatically in a real graph
+============================================================
+
+✅ Task 2 completed!
+
+root@controlplane ~ via 🐍 v3.12.3 (venv) ➜  python3 /root/code/task_3_connecting_edges.py
+🔗 Task 3: Connecting Nodes with Edges
+
+Building your first graph:
+
+Compiling graph...
+✅ Graph compiled successfully!
+
+Running the graph:
+  🔄 Processing in greet_node...
+  🔄 Processing in enhance_node...
+
+Final result: {'name': 'Bob', 'greeting': 'Hello, Bob! Welcome to LangGraph!'}
+
+============================================================
+💡 KEY CONCEPTS:
+- StateGraph: Container for your workflow
+- add_node: Registers a function as a node
+- set_entry_point: Where execution starts
+- add_edge: Connects nodes (A → B)
+- END: Special marker for final node
+- compile: Converts graph to executable app
+============================================================
+
+✅ Task 3 completed!
+
+root@controlplane ~ via 🐍 v3.12.3 (venv) ➜  python3 /root/code/task_4_complete_flow.py
+🎯 Task 4: Complete LangGraph Flow
+
+Building multi-step workflow:
+
+Graph compiled! Running workflow...
+
+  🔄 Creating outline...
+  🔄 Writing draft...
+  🔄 Reviewing and finalizing...
+
+============================================================
+WORKFLOW RESULTS:
+Topic: LangGraph Basics
+Outline: Outline for 'LangGraph Basics':
+1. Introduction
+2....
+Draft: Draft: Expanding on the outline for 'LangGraph Bas...
+Final: Final: Reviewed and polished content about 'LangGraph Basics'. Ready to publish!
+============================================================
+
+💡 KEY CONCEPTS:
+- Multi-node workflows process data in stages
+- State accumulates data from each node
+- Each node focuses on one transformation
+- Edges define the execution order
+
+✅ Task 4 completed!
+
+root@controlplane ~ via 🐍 v3.12.3 (venv) ➜  python3 /root/code/task_5_conditional_routing.py
+🔀 Task 5: Conditional Routing
+
+Building conditional routing graph:
+
+Graph compiled! Testing routing...
+
+============================================================
+TEST 1: Short query
+============================================================
+  🔄 Analyzing query length...
+  🔄 Processing quick response...
+Query: 'What is Python?'
+Route taken: short → quick
+Response: Quick answer: What is Python?...
+
+============================================================
+TEST 2: Long query
+============================================================
+  🔄 Analyzing query length...
+  🔄 Processing detailed analysis...
+Query: 'Explain how LangGraph conditional routing works in detail'
+Route taken: long → detailed
+Response: Detailed analysis: Let me thoroughly explain 'Explain how LangGraph conditional routing works in detail'
+
+============================================================
+💡 KEY CONCEPTS:
+- Router functions examine state
+- Return string matching node name
+- add_conditional_edges maps returns to nodes
+- Different inputs → Different paths
+============================================================
+
+✅ Task 5 completed!
+
+root@controlplane ~ via 🐍 v3.12.3 (venv) ➜  python3 /root/code/task_6_calculator_tool.py
+🧮 Task 6: Simple Calculator Tool
+
+Building calculator graph:
+
+Graph compiled! Testing calculator...
+
+============================================================
+TEST 1: Math query
+============================================================
+  🔄 Analyzing query type...
+  ✅ Detected mathematical query
+  🔄 Processing mathematical query...
+  📊 Invoking calculator tool...
+  🔧 Tool called: calculator_tool
+  📝 Expression: 25 + 17
+  ✅ Calculator returned result
+Query: 'What is 25 plus 17?'
+Result: Answer: 42
+
+============================================================
+TEST 2: Non-math query
+============================================================
+  🔄 Analyzing query type...
+  ℹ️ Non-mathematical query
+  🔄 Processing non-mathematical query...
+  ℹ️ Providing general response
+Query: 'What is the weather today?'
+Result: This is not a math question. Please ask a calculation!
+
+============================================================
+💡 KEY CONCEPTS:
+- Tools are structured functions with @tool decorator
+- bind_tools() attaches tools to LLMs
+- LLM decides when to use tools based on the query
+- Routing directs queries to appropriate tool nodes
+- Conditional edges enable dynamic tool selection
+============================================================
+
+✅ Task 6 completed!
+
+root@controlplane ~ via 🐍 v3.12.3 (venv) ➜  python3 /root/code/task_7_research_agent.py
+🔬 Task 7: Research Agent
+
+/root/code/task_7_research_agent.py:75: RuntimeWarning: This package (`duckduckgo_search`) has been renamed to `ddgs`! Use `pip install ddgs` instead.
+  ddgs = DDGS()  # Replace ___ with DDGS
+Building research agent graph:
+
+Research agent ready! Running tests...
+
+============================================================
+TEST 1: Math query
+============================================================
+  🔄 Analyzing query type...
+  🔢 Detected mathematical query
+  🔄 Processing with calculator...
+  📊 Calculating: What is 156 divided by 12?
+  ✅ Calculator result: 13
+Query: 'What is 156 divided by 12?'
+Tool used: math
+Result: Calculation result: 13
+
+============================================================
+TEST 2: Search query
+============================================================
+  🔄 Analyzing query type...
+  🔍 Detected search query
+  🔄 Searching the web...
+  🔍 Query: What is LangGraph used for?
+  ✅ Found 2 results
+Query: 'What is LangGraph used for?'
+Tool used: search
+Result: Search results:
+- Antarktis – Wikipedia: Antarktis on maapallon eteläosassa sijaitseva alue, johon sisältyy Etelämanner ja sitä ympäröiviä sa...
+- Matkat Antarktis: Kaikki matkastasi Antarktiselle - A...
+
+============================================================
+🎉 CONGRATULATIONS!
+You've built a complete AI research agent with:
+- Query classification (analyze & categorize)
+- Smart tool routing (conditional edges)
+- Calculator for math (LLM-powered)
+- Web search for information (DuckDuckGo)
+- Visual execution flow (with delays)
+- All powered by LangGraph!
+
+💡 This is a production-ready pattern for multi-tool agents!
+============================================================
+
+✅ Task 7 completed!
+
+root@controlplane ~ via 🐍 v3.12.3 (venv) ➜  

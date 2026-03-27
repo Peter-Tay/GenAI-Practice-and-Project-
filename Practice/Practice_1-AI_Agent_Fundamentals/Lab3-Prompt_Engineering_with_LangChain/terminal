@@ -1,0 +1,250 @@
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ➜  source /root/venv/bin/activate && python /root/code/verify_environment.py
+🔧 Verifying Prompt Engineering Lab Environment...
+==================================================
+✅ Virtual environment is active
+
+✅ LangChain available (version: 1.2.13)
+
+✅ OpenAI configuration found
+   API Base: https://kodekey.ai.kodekloud.com/v1
+
+✅ LLM connection test passed
+
+🎉 All environment checks passed!
+Your prompt engineering lab environment is ready.
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ➜  python /root/code/task_1_zero_shot.py
+🎯 Task 1: Zero-Shot Prompting
+==================================================
+
+📝 Part 1: The Problem with Vague Prompts
+----------------------------------------
+❌ Vague prompt: write a data privacy policy
+
+Vague response preview: Certainly! Below is a sample Data Privacy Policy template that you can customize to suit your organi...
+Problem: Too generic, not useful for our company!
+
+📝 Part 2: Specific Zero-Shot Prompting
+----------------------------------------
+✅ Specific prompt: Write a 200-word data privacy policy for European ...
+
+Specific response preview: **Data Privacy Policy**
+
+We are committed to protecting the privacy and personal data of our European customers in compliance with the General Data Protection Regulation (GDPR). This policy outlines h...
+Success: Clear, actionable, company-specific!
+
+📊 Comparison Results:
+Vague response length: 4017 characters
+Specific response length: 1369 characters
+Improvement: -66% more focused!
+
+💡 Zero-Shot Best Practices:
+  ✓ Be specific about the task
+  ✓ Include constraints (word count, format)
+  ✓ Define the context (European, GDPR)
+  ✓ Specify requirements (retention, rights)
+
+✅ Task 1 completed! Zero-shot prompting mastered!
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ➜  python /root/code/task_2_one_shot.py
+🎯 Task 2: One-Shot Prompting
+==================================================
+
+📝 Creating One-Shot Template with Example
+----------------------------------------
+📋 Example provided:
+REFUND POLICY
+1. Eligibility: Within 30 days of purchase
+2. Conditions: Product unused and in original packaging
+3. Process: Submit request via support@company.com
+4. Timeline: Refund processed within 5-7 business days
+5. Exceptions: Digital products and custom orders non-refundable
+
+🔄 Testing One-Shot Prompting
+----------------------------------------
+📤 Sending one-shot prompt for: remote work policy
+
+📥 Generated Policy:
+REMOTE WORK POLICY  
+1. Eligibility: Employees with at least 3 months of tenure  
+2. Conditions: Maintain regular work hours and secure home workspace  
+3. Process: Submit remote work request to direct supervisor for approval  
+4. Timeline: Approval granted or denied within 5 business days  
+5. Exceptions: Roles requiring on-site presence are ineligible for remote work
+
+✅ Format Verification:
+  ✓ Follows the exact format of our example!
+  ✓ Numbered sections maintained
+  ✓ Consistent structure achieved
+
+💡 One-Shot Benefits:
+  ✓ Ensures format consistency
+  ✓ Teaches style through example
+  ✓ Perfect for policy documents
+  ✓ Maintains company standards
+
+✅ Task 2 completed! One-shot prompting mastered!
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ➜  python /root/code/task_3_few_shot.py
+🎯 Task 3: Few-Shot Prompting
+==================================================
+
+📝 Creating Few-Shot Examples
+----------------------------------------
+📚 Examples loaded:
+  Example 1: refund request → I understand you'd like a refund. Let me check you...
+  Example 2: shipping delay → I apologize for the shipping delay. Let me track y...
+  Example 3: password reset → I'll help you reset your password. For security, I...
+
+🔄 Testing Few-Shot Prompting
+----------------------------------------
+📤 New customer issue: account locked
+Using few-shot learning from 3 examples...
+
+📥 AI Response: I see your account is locked. For security reasons, I'll verify your identity before unlocking it. Please provide the email address or phone number linked to your account, and I'll assist you with the next steps.
+
+📊 Response Analysis:
+  ✓ Shows empathy: False
+  ✓ Takes action: False
+  ✓ Provides timeline: False
+  Quality Score: 0/3
+
+💡 Few-Shot Advantages:
+  ✓ Learns your specific tone and style
+  ✓ Maintains consistency across responses
+  ✓ Perfect for customer service
+  ✓ Reduces training time
+
+✅ Task 3 completed! Few-shot prompting mastered!
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ➜  python /root/code/task_4_chain_of_thought.py
+/root/code/task_4_chain_of_thought.py:29: SyntaxWarning: invalid escape sequence '\-'
+  direct_prompt = """Our current data retention policy states:\n- Customer personal data is stored indefinitely\n- There is no documented data deletion or review process\n- System backups are retained forever and include personal data\- No distinction is made between active and inactive users\nFix this policy to comply with GDPR."""
+🎯 Task 4: Chain-of-Thought Prompting
+==================================================
+
+📝 Part 1: Direct Approach (Without Chain-of-Thought)
+----------------------------------------
+❌ Direct prompt: Our current data retention policy states:
+- Customer personal data is stored indefinitely
+- There is no documented data deletion or review process
+- System backups are retained forever and include personal data\- No distinction is made between active and inactive users
+Fix this policy to comply with GDPR.
+
+Direct response preview: To bring your data retention policy into compliance with the GDPR, you should revise it as follows:
+
+---
+
+### Revised Data Retention Policy for GDPR Compliance
+
+1. **Data Minimization and Retention Li...
+Problem: Lacks structure and may miss important details!
+
+📝 Part 2: Chain-of-Thought Approach
+----------------------------------------
+🧠 Reasoning steps defined:
+Step 1: Review GDPR requirements related to data retention and storage limitation
+Step 2: Identify compliance gaps in the current data retention policy
+Step 3: Reference industry best practices for data retention and deletion
+Step 4: Draft specific, GDPR-compliant policy changes
+Step 5: Propose an implementation and enforcement timeline
+
+🔄 Applying Chain-of-Thought Reasoning
+----------------------------------------
+
+📥 Chain-of-Thought Response:
+Absolutely! Let’s work through each step systematically to fix your data retention policy and ensure GDPR compliance.
+
+---
+
+### Step 1: Review GDPR Requirements Related to Data Retention and Storage Limitation
+
+**Key GDPR Articles:**
+
+- **Article 5(1)(e)** — Personal data shall be:
+  - Kept in a form which permits identification of data subjects for no longer than necessary for the purposes for which the personal data are processed (“storage limitation”).
+  - Erased or anonymized once the data i...
+
+📊 Comparison Analysis:
+Direct response length: 2199 characters
+CoT response length: 4404 characters
+
+✅ Chain-of-Thought Benefits:
+  ✓ Structured approach: True
+  ✓ Thorough analysis: True
+  ✓ Clear recommendations: True
+
+💡 Chain-of-Thought Best Practices:
+  ✓ Break complex problems into steps
+  ✓ Guide the AI's thinking process
+  ✓ Ensure comprehensive analysis
+  ✓ Get detailed, reasoned responses
+
+✅ Task 4 completed! Chain-of-thought prompting mastered!
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ➜  python /root/code/task_5_comparison.py
+🎯 Task 5: Prompting Technique Comparison
+==================================================
+🎯 Test Problem: Create an employee remote work policy
+Testing all 4 prompting techniques...
+
+1️⃣ Zero-Shot Prompting
+----------------------------------------
+Response length: 3623 characters
+Preview: Certainly! Here's a sample **Employee Remote Work Policy** that you can customize to fit your organi...
+
+2️⃣ One-Shot Prompting
+----------------------------------------
+Response length: 595 characters
+Preview: REMOTE WORK POLICY  
+1. Eligibility: All full-time employees with at least 3 months of service  
+2. ...
+
+3️⃣ Few-Shot Prompting
+----------------------------------------
+Response length: 412 characters
+Preview: Policy: remote work  
+Format:  
+1. Eligibility: All full-time employees after 3 months of employment...
+
+4️⃣ Chain-of-Thought Prompting
+----------------------------------------
+Response length: 4114 characters
+Preview: Certainly! Let’s carefully work through each step to create a comprehensive employee remote work pol...
+
+📊 Technique Comparison Results
+==================================================
+
+ZERO_SHOT:
+  Length: 3623 characters
+  Has structure: True
+  Specificity: True
+
+ONE_SHOT:
+  Length: 595 characters
+  Has structure: True
+  Specificity: True
+
+FEW_SHOT:
+  Length: 412 characters
+  Has structure: True
+  Specificity: True
+
+CHAIN_OF_THOUGHT:
+  Length: 4114 characters
+  Has structure: False
+  Specificity: True
+
+🏆 Most Detailed: chain_of_thought (4114 characters)
+
+💡 When to Use Each Technique:
+  ✓ Zero-Shot: Quick, general responses
+  ✓ One-Shot: When you need specific formatting
+  ✓ Few-Shot: For consistent style across multiple outputs
+  ✓ Chain-of-Thought: For complex, multi-step problems
+
+✅ Task 5 completed! You've mastered all prompting techniques!
+🎉 Congratulations on completing the Prompt Engineering lab!
+
+root@controlplane ~/code via 🐍 v3.12.3 (venv) ➜  
