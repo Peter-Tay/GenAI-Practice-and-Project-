@@ -1,5 +1,5 @@
 Project List
-1. [[Completed Slides](https://drive.google.com/file/d/1H74m9zZFAw5X6hXyw_QSAHOqs5Ve6I3-/view?usp=sharing)]Personal Doctor Chatbot
+1. [[Completed Slides](https://drive.google.com/file/d/1PiJv38a6BAKQLdjDFo4y0OM_yxK9zSbD/view?usp=sharing)]Personal Doctor Chatbot
 * A RAG based Chatbot with Professional Medical Knowledge (over 2,000 medical topics), which allow user
 immediate access on a variety diseases, symptoms, treatments, and pharmaceuticals.
 * Methodology
