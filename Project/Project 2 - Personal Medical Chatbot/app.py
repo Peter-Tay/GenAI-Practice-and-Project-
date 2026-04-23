@@ -4,6 +4,8 @@ from langchain_pinecone import PineconeVectorStore
 from langchain_openai import ChatOpenAI
 from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
+from langchain.chains import ConversationalRetrievalChain
+from langchain.memory import ConversationBufferMemory
 from langchain_core.prompts import ChatPromptTemplate
 from dotenv import load_dotenv
 from src.prompt import *
@@ -34,12 +36,24 @@ chatModel = ChatOpenAI(model="gpt-4o")
 prompt = ChatPromptTemplate.from_messages(
     [
         ("system", system_prompt),
-        ("human", "{input}"),
+        ("human", "{question}"),
     ]
 )
 
-question_answer_chain = create_stuff_documents_chain(chatModel, prompt)
-rag_chain = create_retrieval_chain(retriever, question_answer_chain)
+memory = ConversationBufferMemory(
+    memory_key="chat_history",
+    return_messages=True
+)
+
+qa_chain = ConversationalRetrievalChain.from_llm(
+    llm=chatModel,
+    retriever=retriever,
+    memory=memory,
+    combine_docs_chain_kwargs={"prompt": prompt}
+)
+
+#question_answer_chain = create_stuff_documents_chain(chatModel, prompt)
+#rag_chain = create_retrieval_chain(retriever, question_answer_chain)
 
 @app.route("/")
 def index():
@@ -50,8 +64,9 @@ def chat():
     msg = request.form["msg"]
     input = msg
     print(input)
-    response = rag_chain.invoke({"input": msg})
+    response = qa_chain.invoke({"question": msg})
     print("Response : ", response["answer"])
+    print(memory.load_memory_variables({}))
     return str(response["answer"])
 
 if __name__ == '__main__':
