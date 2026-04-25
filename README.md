@@ -8,6 +8,7 @@ immediate access on a variety diseases, symptoms, treatments, and pharmaceutical
   * Upload to Pinecones Vector DataBase as Knowledge Base
   * LangChain OpenAI(gpt-4o) retrieve top-3 response from Pinecones
   * Flask + HTML + AWS Deployment (IAM, ECR, EC2)
+  * stores the conversation history with ConversationBufferMemory
 2. [[Completed Slides](https://drive.google.com/file/d/1WQH9eHFGD7F7aJ3tWAYpnl3sLQmHSobO/view?usp=sharing)]SpaceX Falcon 9 First Stage Landing Prediction
 * Predict Falcon 9 launch result with unstructured data collected from Web scraping
 * Methodology
