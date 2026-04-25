@@ -1,15 +1,27 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Simple Clock</title>
+    <meta name="theme-color" content="#ffffff" />
+    <title>Analog Clock</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
     <main class="clock-app">
-      <div id="clock" class="clock" aria-live="polite">00:00:00</div>
+      <section class="clock-section" aria-label="Analog clock">
+        <div class="clock-face">
+          <div class="hand hour-hand"></div>
+          <div class="hand minute-hand"></div>
+          <div class="hand second-hand"></div>
+          <div class="center-dot" aria-hidden="true"></div>
+        </div>
+      </section>
+
+      <section class="digital-time-section" aria-label="Digital time display">
+        <div id="digital-time" aria-live="polite">--:--:--</div>
+      </section>
     </main>
   </body>
 </html>

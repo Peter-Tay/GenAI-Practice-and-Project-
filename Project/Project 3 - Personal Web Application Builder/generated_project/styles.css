@@ -1,80 +1,195 @@
-/* Global reset and base layout */
-html,
-body {
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
+/* Theme tokens */
+:root {
+  --bg: #f4f7fb;
+  --surface: #ffffff;
+  --surface-elevated: rgba(255, 255, 255, 0.72);
+  --text: #152033;
+  --muted: #5b677a;
+  --border: rgba(21, 32, 51, 0.12);
+  --shadow: 0 18px 40px rgba(21, 32, 51, 0.12);
+  --accent: #4f7cff;
+  --accent-2: #ff5c7a;
+  --dial: #eef3fb;
+  --dial-ring: rgba(21, 32, 51, 0.1);
+  --hand-hour: #152033;
+  --hand-minute: #2c3e55;
+  --hand-second: var(--accent-2);
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
 }
 
-html {
+html[data-theme="dark"] {
+  --bg: #0c1220;
+  --surface: #131b2d;
+  --surface-elevated: rgba(19, 27, 45, 0.72);
+  --text: #eef3fb;
+  --muted: #a4b0c2;
+  --border: rgba(238, 243, 251, 0.12);
+  --shadow: 0 18px 40px rgba(0, 0, 0, 0.34);
+  --accent: #7aa2ff;
+  --accent-2: #ff6b8b;
+  --dial: #182338;
+  --dial-ring: rgba(238, 243, 251, 0.12);
+  --hand-hour: #eef3fb;
+  --hand-minute: #cdd7e6;
+  --hand-second: var(--accent-2);
+}
+
+* {
   box-sizing: border-box;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
+html,
+body {
+  height: 100%;
 }
 
 body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--text);
+  background:
+    radial-gradient(circle at top, rgba(79, 124, 255, 0.12), transparent 38%),
+    linear-gradient(180deg, var(--bg), var(--bg));
   min-height: 100vh;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(180deg, #f4f7fb 0%, #e9eef5 100%);
-  color: #111827;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-  line-height: 1.5;
 }
 
-/* App container */
 .clock-app {
-  width: min(92vw, 720px);
-  display: grid;
-  place-items: center;
-  padding: 1rem;
-}
-
-/* Primary clock display */
-.clock {
-  width: 100%;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem 2.25rem;
-  border-radius: 1.25rem;
-  background: rgba(17, 24, 39, 0.92);
-  color: #f8fafc;
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-  font-size: clamp(2.75rem, 8vw, 6rem);
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-align: center;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18),
-    0 2px 8px rgba(15, 23, 42, 0.12);
-  text-shadow: 0 0 18px rgba(96, 165, 250, 0.2);
-  user-select: none;
+  gap: clamp(1.25rem, 3vw, 3rem);
+  padding: clamp(1rem, 3vw, 2.5rem);
 }
 
-/* Responsive adjustments */
-@media (max-width: 640px) {
+.clock-section,
+.digital-time-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clock-face {
+  position: relative;
+  width: min(78vw, 22rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffffff, var(--dial) 68%);
+  border: 10px solid var(--surface);
+  box-shadow: var(--shadow), inset 0 0 0 1px var(--dial-ring);
+}
+
+.clock-face::before {
+  content: "";
+  position: absolute;
+  inset: 0.85rem;
+  border-radius: 50%;
+  border: 1px solid var(--dial-ring);
+  pointer-events: none;
+}
+
+.hand {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform-origin: 50% 100%;
+  transform: translateX(-50%) rotate(0deg);
+  border-radius: 999px;
+  will-change: transform;
+}
+
+.hour-hand {
+  width: 0.55rem;
+  height: 28%;
+  background: linear-gradient(180deg, var(--hand-hour), rgba(21, 32, 51, 0.8));
+}
+
+.minute-hand {
+  width: 0.38rem;
+  height: 38%;
+  background: linear-gradient(180deg, var(--hand-minute), rgba(44, 62, 85, 0.82));
+}
+
+.second-hand {
+  width: 0.18rem;
+  height: 42%;
+  background: var(--hand-second);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18);
+  transition: transform 0.08s linear;
+}
+
+.center-dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1rem;
+  height: 1rem;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--surface);
+  border: 0.22rem solid var(--accent);
+  box-shadow: 0 0 0 0.2rem rgba(79, 124, 255, 0.16);
+  z-index: 3;
+}
+
+#digital-time {
+  min-width: 11ch;
+  padding: 1rem 1.35rem;
+  border-radius: 1rem;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  color: var(--text);
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-align: center;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+@media (max-width: 760px) {
   .clock-app {
-    width: min(94vw, 560px);
-    padding: 0.75rem;
+    flex-direction: column;
+    gap: 1.25rem;
   }
 
-  .clock {
-    padding: 1.15rem 1.5rem;
-    font-size: clamp(2.2rem, 14vw, 4rem);
-    letter-spacing: 0.1em;
-    border-radius: 1rem;
+  .clock-face {
+    width: min(86vw, 19rem);
+    border-width: 8px;
+  }
+
+  #digital-time {
+    width: min(86vw, 19rem);
+    padding: 0.9rem 1rem;
+    font-size: clamp(1.25rem, 7vw, 1.75rem);
   }
 }
 
 @media (max-width: 420px) {
-  .clock {
-    padding: 0.95rem 1rem;
-    font-size: clamp(1.8rem, 15vw, 3rem);
-    letter-spacing: 0.08em;
+  .clock-app {
+    padding: 0.85rem;
+  }
+
+  .clock-face {
+    width: min(90vw, 16.5rem);
+  }
+
+  .hour-hand {
+    width: 0.48rem;
+  }
+
+  .minute-hand {
+    width: 0.32rem;
+  }
+
+  .second-hand {
+    width: 0.16rem;
+  }
+
+  .center-dot {
+    width: 0.84rem;
+    height: 0.84rem;
   }
 }
