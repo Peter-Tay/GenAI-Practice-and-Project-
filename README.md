@@ -9,13 +9,13 @@ immediate access on a variety diseases, symptoms, treatments, and pharmaceutical
   * LangChain OpenAI(gpt-4o) retrieve top-3 response from Pinecones
   * Flask + HTML + AWS Deployment (IAM, ECR, EC2)
   * stores the conversation history with ConversationBufferMemory
-2. [[Completed Slides]()]Personal Web Application Builder
+2. [[Completed Slides](https://drive.google.com/file/d/1IRlHlDBONyb64zKQGvjq09Ht6HBhUga8/view?usp=sharing)]Personal Web Application Builder
 * An Agentic AI based tool which help generate code and build the entire web application.
 * Methodology
   * Planner: Design a complete engineering project plan based on user request
   * Architect: Break given project plan into multiple explicit implementation engineering tasks
   * Coder: Implement given specific engineering task
-3. [[Completed Slides]()]Personal Research Assistant
+3. [[Completed Slides](https://drive.google.com/file/d/1F49hcL3x5Thms1C3zvy7OA3CqOBcvTs5/view?usp=sharing)]Personal Research Assistant
 * A Multi-Agent AI based tool which help gathers, analyzes and summarizes a given topic into a final report.
 * Methodology
   * Supervisor Agent: Supervise and manages a team of agents
