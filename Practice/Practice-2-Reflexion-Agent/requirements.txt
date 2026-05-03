@@ -1,0 +1,13 @@
+langgraph
+langchain
+langsmith
+python-dotenv
+langchain_groq
+langchain_tavily
+langchain-mcp-adapters
+mcp
+langchain_openai
+langgraph-cli[inmem]
+langchain_community
+python-decouple
+tavily-python
